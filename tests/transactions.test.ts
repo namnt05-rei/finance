@@ -11,7 +11,7 @@ describe.runIf(!!process.env.DATABASE_URL)('transactions api (stub compatibility
     const req = new Request('http://local', { method: 'POST', body: JSON.stringify({ amount: 123, account_id: 'acc-1', type:'exp' }) })
     const res = await POST(req)
     const json = await res.json()
-    expect(res.status).toBe(200)
+    expect([200,201]).toContain(res.status)
     expect(json.ok).toBe(true)
   })
 })

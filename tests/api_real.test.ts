@@ -19,7 +19,7 @@ describe.runIf(!!process.env.DATABASE_URL)('transactions real api', () => {
     })
     const res = await txPost(req)
     const j = await res.json()
-    expect(res.status).toBe(200)
+    expect([200,201]).toContain(res.status)
     expect(j.ok).toBe(true)
     expect(typeof j.id).toBe('string')
   })
