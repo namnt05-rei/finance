@@ -13,7 +13,7 @@ importers:
         version: 17.2.3
       drizzle-orm:
         specifier: ^0.44.6
-        version: 0.44.6(pg@8.16.3)
+        version: 0.44.6(@types/pg@8.15.5)(pg@8.16.3)
       next:
         specifier: 15.5.4
         version: 15.5.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -26,6 +26,9 @@ importers:
       react-dom:
         specifier: 19.1.0
         version: 19.1.0(react@19.1.0)
+      zod:
+        specifier: ^4.1.11
+        version: 4.1.11
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -36,6 +39,9 @@ importers:
       '@types/node':
         specifier: ^20
         version: 20.19.19
+      '@types/pg':
+        specifier: ^8.15.5
+        version: 8.15.5
       '@types/react':
         specifier: ^19
         version: 19.2.0
@@ -875,6 +881,9 @@ packages:
 
   '@types/node@20.19.19':
     resolution: {integrity: sha512-pb1Uqj5WJP7wrcbLU7Ru4QtA0+3kAXrkutGiD26wUKzSMgNNaPARTUDQmElUXp64kh3cWdou3Q0C7qwwxqSFmg==}
+
+  '@types/pg@8.15.5':
+    resolution: {integrity: sha512-LF7lF6zWEKxuT3/OR8wAZGzkg4ENGXFNyiV/JeOt9z5B+0ZVwbql9McqX5c/WStFq1GaGso7H1AzP/qSzmlCKQ==}
 
   '@types/react-dom@19.2.0':
     resolution: {integrity: sha512-brtBs0MnE9SMx7px208g39lRmC5uHZs96caOJfTjFcYSLHNamvaSMfJNagChVNkup2SdtOxKX1FDBkRSJe1ZAg==}
@@ -2586,6 +2595,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zod@4.1.11:
+    resolution: {integrity: sha512-WPsqwxITS2tzx1bzhIKsEs19ABD5vmCVa4xBo2tq/SrV4RNZtfws1EnCWQXM6yh8bD08a1idvkB5MZSBiZsjwg==}
+
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
@@ -3149,6 +3161,12 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
+  '@types/pg@8.15.5':
+    dependencies:
+      '@types/node': 20.19.19
+      pg-protocol: 1.10.3
+      pg-types: 2.2.0
+
   '@types/react-dom@19.2.0(@types/react@19.2.0)':
     dependencies:
       '@types/react': 19.2.0
@@ -3589,8 +3607,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.44.6(pg@8.16.3):
+  drizzle-orm@0.44.6(@types/pg@8.15.5)(pg@8.16.3):
     optionalDependencies:
+      '@types/pg': 8.15.5
       pg: 8.16.3
 
   dunder-proto@1.0.1:
@@ -5111,3 +5130,5 @@ snapshots:
   yallist@5.0.0: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@4.1.11: {}
