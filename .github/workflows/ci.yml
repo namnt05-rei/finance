@@ -27,7 +27,17 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
+
+      # Cài dependencies + chạy kiểm tra cơ bản
       - run: pnpm install
       - run: pnpm lint
       - run: pnpm test
+
+      # CÀI RUNNER & BROWSERS CHUẨN VERSION (pin Playwright @1.56.1)
+      - run: pnpm dlx @playwright/test@1.56.1 install --with-deps
+
+      # CHẠY E2E BẰNG RUNNER ĐÃ PIN
+      - run: pnpm e2e
+
+      # Build cuối cùng
       - run: pnpm build
