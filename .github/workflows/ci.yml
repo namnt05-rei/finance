@@ -28,8 +28,10 @@ jobs:
           node-version: 20
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm install
       - run: pnpm lint
       - run: pnpm test
-      - run: npx playwright install --with-deps   # vẫn giữ
-      - run: pnpm e2e                              # sẽ gọi 'playwright test'
+      - run: pnpm build
+      - run: pnpm start &            # App Router => dùng next start
+      - run: pnpm dlx cypress install
+      - run: CYPRESS_BASE_URL=http://localhost:3000 pnpm cy:run
+
