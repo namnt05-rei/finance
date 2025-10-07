@@ -1,10 +1,9 @@
 name: CI
-
 on:
   push:
-    branches: [ "**" ]
+    branches: ["**"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -15,23 +14,28 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
+      CYPRESS_BASE_URL: http://localhost:3001
     steps:
       - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
-        with:
-          version: 9
+        with: { version: 9 }
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
+
       - run: pnpm install
       - run: pnpm lint
       - run: pnpm test
       - run: pnpm build
-      - run: pnpm start &            # App Router => dùng next start
-      - run: pnpm dlx cypress install
-      - run: CYPRESS_BASE_URL=http://localhost:3000 pnpm cy:run
 
+      # Start Next on 3001 để tránh đụng các runner khác
+      - run: PORT=3001 pnpm start &
+      # chờ server sẵn sàng
+      - run: pnpm dlx wait-on http-get://localhost:3001
+
+      # Cài Cypress binary & chạy headless (Electron)
+      - run: pnpm dlx cypress install
+      - run: pnpm cy:run
